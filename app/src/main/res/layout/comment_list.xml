@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:orientation="vertical"
+        android:gravity="left"
+        android:background="@color/background"
+        android:paddingVertical="15dp"
+        >
+
+    <com.example.coderanknew.user.UserPreview
+            android:id="@+id/upCommentAuthor"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            />
+
+    <TextView
+            android:id="@+id/tvCommentContent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="18sp"
+            android:textColor="@color/text"
+            android:background="@drawable/rounded_text_view"
+            android:padding="15dp"
+            android:text="This comment can sock me. Who you think you are?"
+            />
+
+</LinearLayout>
