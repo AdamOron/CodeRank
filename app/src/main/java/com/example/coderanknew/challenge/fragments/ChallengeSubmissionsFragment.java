@@ -14,6 +14,7 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.example.coderanknew.R;
+import com.example.coderanknew.challenge.Challenge;
 import com.example.coderanknew.challenge.NormalChallenge;
 import com.example.coderanknew.sql.Database;
 import com.example.coderanknew.submission.CreateSubmissionActivity;
@@ -23,21 +24,18 @@ import com.example.coderanknew.submission.SubmissionAdapter;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ChallengeSubmissionsFragment extends Fragment implements View.OnClickListener, AdapterView.OnItemClickListener {
+public class ChallengeSubmissionsFragment extends Fragment implements View.OnClickListener, AdapterView.OnItemClickListener
+{
 	private View view;
 
-	private NormalChallenge challenge;
+	private Challenge challenge;
 
 	private SubmissionAdapter submissionAdapter;
 	private ArrayList<Submission> submissions;
 
-	public ChallengeSubmissionsFragment()
+	public ChallengeSubmissionsFragment(Challenge challenge)
 	{
-	}
-
-	public static ChallengeSubmissionsFragment newInstance()
-	{
-		return new ChallengeSubmissionsFragment();
+		this.challenge = challenge;
 	}
 
 	@Override

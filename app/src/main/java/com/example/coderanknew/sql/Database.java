@@ -9,6 +9,7 @@ import android.util.Log;
 
 import androidx.annotation.Nullable;
 
+import com.example.coderanknew.challenge.Challenge;
 import com.example.coderanknew.user.User;
 import com.example.coderanknew.challenge.NormalChallenge;
 import com.example.coderanknew.comment.Comment;
@@ -296,39 +297,39 @@ public class Database extends SQLiteOpenHelper
         return database.update(TBL_CHALLENGES, values, COL_CH_ID + "=" + challenge.id, null);
     }
 
-    public long deleteChallengeById(long chalId)
+    public long deleteChallengeById(long challengeId)
     {
-        return database.delete(TBL_CHALLENGES, COL_CH_ID + "=" + chalId, null);
+        return database.delete(TBL_CHALLENGES, COL_CH_ID + "=" + challengeId, null);
     }
 
-    public NormalChallenge getChallengeByFilter(String selection)
+    public Challenge getChallengeByFilter(String selection)
     {
         Cursor cursor = database.query(TBL_CHALLENGES, COLS_CHALLENGES, selection, null, null, null, null);
         return singleChallengeFromCursor(cursor);
     }
 
-    public ArrayList<NormalChallenge> getAllChallengesByFilter(String selection, String OrderBy)
+    public ArrayList<Challenge> getAllChallengesByFilter(String selection, String OrderBy)
     {
         Cursor cursor = database.query(TBL_CHALLENGES, COLS_CHALLENGES, selection, null, null, null, OrderBy);
         return allChallengesFromCursor(cursor);
     }
 
-    public NormalChallenge getChallengeById(long chalId)
+    public Challenge getChallengeById(long challengeId)
     {
-        Cursor cursor=database.query(TBL_CHALLENGES, COLS_CHALLENGES, COL_CH_ID + "=" + chalId, null, null, null, null);
+        Cursor cursor=database.query(TBL_CHALLENGES, COLS_CHALLENGES,COL_CH_ID + "=" + challengeId, null, null, null, null);
         if(!cursor.moveToFirst()) return null;
         return singleChallengeFromCursor(cursor);
     }
 
-    public ArrayList<NormalChallenge> getAllChallenges()
+    public ArrayList<Challenge> getAllChallenges()
     {
         Cursor cursor = database.query(TBL_CHALLENGES, COLS_CHALLENGES, null, null, null, null, null);
         return allChallengesFromCursor(cursor);
     }
 
-    private static ArrayList<NormalChallenge> allChallengesFromCursor(Cursor cursor)
+    private static ArrayList<Challenge> allChallengesFromCursor(Cursor cursor)
     {
-        ArrayList<NormalChallenge> list = new ArrayList<>();
+        ArrayList<Challenge> list = new ArrayList<>();
 
         if(cursor.moveToFirst())
         {
@@ -346,7 +347,7 @@ public class Database extends SQLiteOpenHelper
      * @param cursor
      * @return the Challenge from the Cursor's current position.
      */
-    private static NormalChallenge singleChallengeFromCursor(Cursor cursor)
+    private static Challenge singleChallengeFromCursor(Cursor cursor)
     {
         long id = cursor.getLong(cursor.getColumnIndexOrThrow(COL_CH_ID));
         long authorId = cursor.getLong(cursor.getColumnIndexOrThrow(COL_CH_AUTHOR));
@@ -354,7 +355,7 @@ public class Database extends SQLiteOpenHelper
         String content = cursor.getString(cursor.getColumnIndexOrThrow(COL_CH_CONTENT));
         Date date = SQLDate.fromString(cursor.getString(cursor.getColumnIndexOrThrow(COL_CH_DATE)));
 
-        return new NormalChallenge(id, authorId, title, content, date);
+        return new NormalChallenge(id, authorId, date, title, content);
     }
 
     /**

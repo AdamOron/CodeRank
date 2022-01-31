@@ -40,11 +40,10 @@ public class ChallengeCreateActivity extends AppCompatActivity implements View.O
 	@Override
 	public void onClick(View view)
 	{
-		switch(view.getId())
+		if(view.getId() == R.id.bSubmit)
 		{
-			case R.id.bSubmit:
-				createChallenge();
-				break;
+			createChallenge();
+			return;
 		}
 	}
 
@@ -65,8 +64,7 @@ public class ChallengeCreateActivity extends AppCompatActivity implements View.O
 	private void enterCreatedChallenge(long createdId)
 	{
 		Intent intent = new Intent(this, ChallengeViewActivity.class);
-		intent.putExtra(NormalChallenge.KEY_ID, createdId);
-
+		intent.putExtra(Challenge.KEY_ID, createdId);
 		startActivity(intent);
 	}
 }

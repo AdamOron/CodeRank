@@ -10,8 +10,9 @@ import androidx.lifecycle.Lifecycle;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 import androidx.viewpager2.widget.ViewPager2;
 import com.example.coderanknew.R;
-import com.example.coderanknew.challenge.fragments.ChallengeOverviewFragment;
+import com.example.coderanknew.challenge.fragments.overview.ChallengeOverviewFragment;
 import com.example.coderanknew.challenge.fragments.ChallengeSubmissionsFragment;
+import com.example.coderanknew.sql.Database;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
 
@@ -19,7 +20,7 @@ import java.security.InvalidParameterException;
 
 public class ChallengeViewActivity extends FragmentActivity
 {
-	private static final String[] FRAG_TITLES = {"Overview", "submissions"};
+	private static final String[] FRAG_TITLES = {"Overview", "Submissions"};
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
@@ -46,7 +47,34 @@ public class ChallengeViewActivity extends FragmentActivity
 		.attach();
 	}
 
-	private static class ChallengeFragmentAdapter extends FragmentStateAdapter
+	private Challenge getChallenge()
+	{
+		final int INVALID_VALUE = -1;
+
+		Bundle intentExtras = getIntent().getExtras();
+		long challengeId = intentExtras.getLong(NormalChallenge.KEY_ID, INVALID_VALUE);
+
+		if(challengeId == INVALID_VALUE)
+		{
+			throw new IllegalArgumentException("No Challenge ID was passed to ChallengeViewActivity.");
+		}
+
+		Database database = new Database(this);
+		database.open();
+
+		Challenge challenge = database.getChallengeById(challengeId);
+
+		database.close();
+
+		if(challenge == null)
+		{
+			throw new IllegalArgumentException("Challenge ID passed to ChallengeViewActivity doesn't exist in ChallengeDatabase.");
+		}
+
+		return challenge;
+	}
+
+	private class ChallengeFragmentAdapter extends FragmentStateAdapter
 	{
 		public ChallengeFragmentAdapter(@NonNull FragmentManager fragmentManager, @NonNull Lifecycle lifecycle)
 		{
@@ -57,13 +85,15 @@ public class ChallengeViewActivity extends FragmentActivity
 		@Override
 		public Fragment createFragment(int position)
 		{
+			Challenge challenge = getChallenge();
+
 			switch(position)
 			{
 				case 0:
-					return new ChallengeOverviewFragment();
+					return challenge.createOverviewFragment();
 
 				case 1:
-					return new ChallengeSubmissionsFragment();
+					return new ChallengeSubmissionsFragment(challenge);
 			}
 
 			throw new InvalidParameterException(position + " is an invalid Challenge Fragment position.");

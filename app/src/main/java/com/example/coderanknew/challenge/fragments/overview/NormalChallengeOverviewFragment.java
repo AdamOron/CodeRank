@@ -1,14 +1,20 @@
-package com.example.coderanknew.challenge.fragments;
+package com.example.coderanknew.challenge.fragments.overview;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 import com.example.coderanknew.R;
+import com.example.coderanknew.challenge.NormalChallenge;
 import com.example.coderanknew.user.UserPreview;
 
-public class NormalChallengeOverviewFragment extends ChallengeOverviewFragment
+public class NormalChallengeOverviewFragment extends ChallengeOverviewFragment<NormalChallenge>
 {
+    public NormalChallengeOverviewFragment(NormalChallenge challenge)
+    {
+        super(challenge);
+    }
+
     @Override
     protected View inflate(LayoutInflater inflater, ViewGroup container)
     {

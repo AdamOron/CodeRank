@@ -16,7 +16,7 @@
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:src="@drawable/submission_top"
+            android:src="@drawable/submission_header"
             />
 
         <com.example.coderanknew.user.UserPreview
@@ -48,7 +48,7 @@
         android:fontFamily="sans-serif-medium"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/submission_bottom"
+        android:background="@drawable/submission_body"
         android:textColor="@color/text"
         android:padding="15dp"
         android:textSize="18sp"

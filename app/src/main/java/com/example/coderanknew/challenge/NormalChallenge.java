@@ -1,5 +1,6 @@
 package com.example.coderanknew.challenge;
 
+import com.example.coderanknew.challenge.fragments.overview.NormalChallengeOverviewFragment;
 import java.util.Date;
 
 public class NormalChallenge extends Challenge
@@ -17,5 +18,11 @@ public class NormalChallenge extends Challenge
 	public NormalChallenge(long authorId, String title, String content, Date creationDate)
 	{
 		this(0L, authorId, creationDate, title, content);
+	}
+
+	@Override
+	public NormalChallengeOverviewFragment createOverviewFragment()
+	{
+		return new NormalChallengeOverviewFragment(this);
 	}
 }
