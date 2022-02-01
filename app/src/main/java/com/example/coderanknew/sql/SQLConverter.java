@@ -21,8 +21,9 @@ public class SQLConverter
 
 	public static byte[] bitmapToBlob(Bitmap bitmap)
 	{
+		Bitmap resized = Bitmap.createScaledBitmap(bitmap, 256, 256, false);
 		ByteArrayOutputStream bos = new ByteArrayOutputStream();
-		bitmap.compress(Bitmap.CompressFormat.JPEG, 100, bos);
+		resized.compress(Bitmap.CompressFormat.JPEG, 75, bos);
 		return bos.toByteArray();
 	}
 

@@ -36,7 +36,7 @@ public class Database extends SQLiteOpenHelper
     public static final String COL_U_PASSWORD_HASH = "userPasswordHash";
     public static final String COL_U_PICTURE = "userPicture";
 
-    public static final String[] COLS_USERS = {COL_U_ID, COL_U_FIRSTNAME, COL_U_LASTNAME, COL_U_EMAIL, COL_U_USERNAME};
+    public static final String[] COLS_USERS = {COL_U_ID, COL_U_FIRSTNAME, COL_U_LASTNAME, COL_U_EMAIL, COL_U_USERNAME, COL_U_PICTURE};
 
     private static final String CREATE_TBL_USERS =
             "CREATE TABLE IF NOT EXISTS " + TBL_USERS + "(" +
@@ -45,7 +45,8 @@ public class Database extends SQLiteOpenHelper
                     COL_U_LASTNAME + " VARCHAR," +
                     COL_U_EMAIL + " VARCHAR," +
                     COL_U_USERNAME + " VARCHAR," +
-                    COL_U_PASSWORD_HASH + " VARCHAR)";
+                    COL_U_PASSWORD_HASH + " VARCHAR, " +
+                    COL_U_PICTURE + " BLOB)";
 
     /**
      * ============================================================================================
@@ -132,7 +133,7 @@ public class Database extends SQLiteOpenHelper
      * ============================================================================================
      */
 
-    private static final int DB_VERSION = 1;
+    private static final int DB_VERSION = 2;
     public static final String DB_NAME = "database.db";
 
     private SQLiteDatabase database;

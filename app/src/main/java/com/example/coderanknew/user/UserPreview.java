@@ -13,6 +13,7 @@ import com.example.coderanknew.sql.Database;
 public class  UserPreview extends LinearLayout implements View.OnClickListener
 {
 	private TextView tvUsername;
+	private ImageView ivProfilePicture;
 
 	private User user;
 
@@ -29,28 +30,28 @@ public class  UserPreview extends LinearLayout implements View.OnClickListener
 	{
 		readUser(userId);
 
-		 ivProfilePicture.setImageBitmap();
-
 		tvUsername.setText(user.username);
+
+		ivProfilePicture.setImageBitmap(user.picture);
 	}
 
 	private void readUser(long userId)
 	{
 		Database database = new Database(getContext());
 		database.open();
-		this.user = database.getUserById(userId);
+		user = database.getUserById(userId);
 		database.close();
 	}
 
 	private void initVars()
 	{
+		/* Listen to Username clicks */
+		tvUsername = findViewById(R.id.tvUsername);
+		tvUsername.setOnClickListener(this);
+
 		/* Listen to Profile Picture clicks */
 		ivProfilePicture = findViewById(R.id.ivProfilePicture);
 		ivProfilePicture.setOnClickListener(this);
-
-		/* Listen to Username clicks */
-		this.tvUsername = findViewById(R.id.tvUsername);
-		tvUsername.setOnClickListener(this);
 	}
 
 	@Override
