@@ -34,6 +34,7 @@ public class Database extends SQLiteOpenHelper
     public static final String COL_U_EMAIL = "userEmail";
     public static final String COL_U_USERNAME = "userUsername";
     public static final String COL_U_PASSWORD_HASH = "userPasswordHash";
+    public static final String COL_U_PICTURE = "userPicture";
 
     public static final String[] COLS_USERS = {COL_U_ID, COL_U_FIRSTNAME, COL_U_LASTNAME, COL_U_EMAIL, COL_U_USERNAME};
 
@@ -182,6 +183,7 @@ public class Database extends SQLiteOpenHelper
         values.put(COL_U_EMAIL, user.email);
         values.put(COL_U_USERNAME, user.username);
         values.put(COL_U_PASSWORD_HASH, passwordHash);
+        values.put(COL_U_PICTURE, SQLConverter.bitmapToBlob(user.picture));
 
         long insertedId = database.insert(TBL_USERS, null, values);
 
@@ -198,6 +200,7 @@ public class Database extends SQLiteOpenHelper
         values.put(COL_U_LASTNAME, user.lastName);
         values.put(COL_U_EMAIL, user.email);
         values.put(COL_U_USERNAME, user.username);
+        values.put(COL_U_PICTURE, SQLConverter.bitmapToBlob(user.picture));
 
         return database.update(TBL_USERS, values, COL_U_ID + "=" + user.id, null);
     }
@@ -260,8 +263,9 @@ public class Database extends SQLiteOpenHelper
         String lastName = cursor.getString(cursor.getColumnIndexOrThrow(COL_U_LASTNAME));
         String email = cursor.getString(cursor.getColumnIndexOrThrow(COL_U_EMAIL));
         String username = cursor.getString(cursor.getColumnIndexOrThrow(COL_U_USERNAME));
+        byte[] picture = cursor.getBlob(cursor.getColumnIndexOrThrow(COL_U_PICTURE));
 
-        return new User(id, firstName, lastName, email, username);
+        return new User(id, firstName, lastName, email, username, SQLConverter.bitmapFromBlob(picture));
     }
 
     /**
@@ -276,7 +280,7 @@ public class Database extends SQLiteOpenHelper
         values.put(COL_CH_AUTHOR, challenge.authorId);
         values.put(COL_CH_TITLE, challenge.title);
         values.put(COL_CH_CONTENT, challenge.content);
-        values.put(COL_CH_DATE, SQLDate.toString(challenge.creationDate));
+        values.put(COL_CH_DATE, SQLConverter.dateToString(challenge.creationDate));
 
         long insertedId = database.insert(TBL_CHALLENGES, null, values);
 
@@ -292,7 +296,7 @@ public class Database extends SQLiteOpenHelper
         values.put(COL_CH_AUTHOR, challenge.authorId);
         values.put(COL_CH_TITLE, challenge.title);
         values.put(COL_CH_CONTENT, challenge.content);
-        values.put(COL_CH_DATE, SQLDate.toString(challenge.creationDate));
+        values.put(COL_CH_DATE, SQLConverter.dateToString(challenge.creationDate));
 
         return database.update(TBL_CHALLENGES, values, COL_CH_ID + "=" + challenge.id, null);
     }
@@ -353,7 +357,7 @@ public class Database extends SQLiteOpenHelper
         long authorId = cursor.getLong(cursor.getColumnIndexOrThrow(COL_CH_AUTHOR));
         String title = cursor.getString(cursor.getColumnIndexOrThrow(COL_CH_TITLE));
         String content = cursor.getString(cursor.getColumnIndexOrThrow(COL_CH_CONTENT));
-        Date date = SQLDate.fromString(cursor.getString(cursor.getColumnIndexOrThrow(COL_CH_DATE)));
+        Date date = SQLConverter.dateFromString(cursor.getString(cursor.getColumnIndexOrThrow(COL_CH_DATE)));
 
         return new NormalChallenge(id, authorId, date, title, content);
     }
@@ -466,7 +470,7 @@ public class Database extends SQLiteOpenHelper
         ContentValues values = new ContentValues();
         values.put(COL_COM_AUTHOR_ID, com.authorId);
         values.put(COL_COM_CONTENT, com.content);
-        values.put(COL_COM_DATE, SQLDate.toString(com.creationDate));
+        values.put(COL_COM_DATE, SQLConverter.dateToString(com.creationDate));
         values.put(COL_COM_PARENT, com.parent);
 
         long insertedId = database.insert(table, null, values);
@@ -482,7 +486,7 @@ public class Database extends SQLiteOpenHelper
         values.put(COL_COM_ID, com.id);
         values.put(COL_COM_AUTHOR_ID, com.authorId);
         values.put(COL_COM_CONTENT, com.content);
-        values.put(COL_COM_DATE, SQLDate.toString(com.creationDate));
+        values.put(COL_COM_DATE, SQLConverter.dateToString(com.creationDate));
         values.put(COL_COM_PARENT, com.parent);
 
         return database.update(table, values, COL_COM_ID + "=" + com.id, null);
@@ -542,7 +546,7 @@ public class Database extends SQLiteOpenHelper
         long id = cursor.getLong(cursor.getColumnIndexOrThrow(COL_COM_ID));
         long authorId = cursor.getLong(cursor.getColumnIndexOrThrow(COL_COM_AUTHOR_ID));
         String content = cursor.getString(cursor.getColumnIndexOrThrow(COL_COM_CONTENT));
-        Date date = SQLDate.fromString(cursor.getString(cursor.getColumnIndexOrThrow(COL_COM_DATE)));
+        Date date = SQLConverter.dateFromString(cursor.getString(cursor.getColumnIndexOrThrow(COL_COM_DATE)));
         long parent = cursor.getLong(cursor.getColumnIndexOrThrow(COL_COM_PARENT));
 
         return new Comment(id, authorId, content, date, parent);

@@ -2,6 +2,8 @@ package com.example.coderanknew;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
@@ -63,8 +65,9 @@ public class RegisterActivity extends Activity implements View.OnClickListener
 		String email = etEmail.getText().toString();
 		String username = etUsername.getText().toString();
 		String password = etPassword.getText().toString();
+		Bitmap picture = BitmapFactory.decodeResource(getResources(), R.drawable.cat);
 
-		if(LoginManager.attemptRegister(this, new User(firstName, lastName, email, username), password))
+		if(LoginManager.attemptRegister(this, new User(firstName, lastName, email, username, picture), password))
 		{
 			enterHome();
 		}

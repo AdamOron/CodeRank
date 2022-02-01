@@ -12,7 +12,6 @@ import com.example.coderanknew.sql.Database;
 
 public class  UserPreview extends LinearLayout implements View.OnClickListener
 {
-	private ImageView ivProfilePicture;
 	private TextView tvUsername;
 
 	private User user;
@@ -30,8 +29,7 @@ public class  UserPreview extends LinearLayout implements View.OnClickListener
 	{
 		readUser(userId);
 
-		// Read bitmap
-		// ivProfilePicture.setImageBitmap();
+		 ivProfilePicture.setImageBitmap();
 
 		tvUsername.setText(user.username);
 	}
@@ -47,7 +45,7 @@ public class  UserPreview extends LinearLayout implements View.OnClickListener
 	private void initVars()
 	{
 		/* Listen to Profile Picture clicks */
-		this.ivProfilePicture = findViewById(R.id.ivProfilePicture);
+		ivProfilePicture = findViewById(R.id.ivProfilePicture);
 		ivProfilePicture.setOnClickListener(this);
 
 		/* Listen to Username clicks */
