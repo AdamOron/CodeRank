@@ -10,12 +10,10 @@ import androidx.lifecycle.Lifecycle;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 import androidx.viewpager2.widget.ViewPager2;
 import com.example.coderanknew.R;
-import com.example.coderanknew.challenge.fragments.overview.ChallengeOverviewFragment;
 import com.example.coderanknew.challenge.fragments.ChallengeSubmissionsFragment;
 import com.example.coderanknew.sql.Database;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
-
 import java.security.InvalidParameterException;
 
 public class ChallengeViewActivity extends FragmentActivity
@@ -41,10 +39,12 @@ public class ChallengeViewActivity extends FragmentActivity
 		new TabLayoutMediator(tlChallengeTabs, viewPager, (tab, position) ->
 		{
 			tab.setText(FRAG_TITLES[position]);
-
 			viewPager.setCurrentItem(position, true);
 		})
 		.attach();
+
+		/* Start at first tab */
+		viewPager.setCurrentItem(0);
 	}
 
 	private Challenge getChallenge()
@@ -52,7 +52,7 @@ public class ChallengeViewActivity extends FragmentActivity
 		final int INVALID_VALUE = -1;
 
 		Bundle intentExtras = getIntent().getExtras();
-		long challengeId = intentExtras.getLong(NormalChallenge.KEY_ID, INVALID_VALUE);
+		long challengeId = intentExtras.getLong(Challenge.KEY_ID, INVALID_VALUE);
 
 		if(challengeId == INVALID_VALUE)
 		{
@@ -76,17 +76,19 @@ public class ChallengeViewActivity extends FragmentActivity
 
 	private class ChallengeFragmentAdapter extends FragmentStateAdapter
 	{
+		private final Challenge challenge;
+
 		public ChallengeFragmentAdapter(@NonNull FragmentManager fragmentManager, @NonNull Lifecycle lifecycle)
 		{
 			super(fragmentManager, lifecycle);
+
+			this.challenge = getChallenge();
 		}
 
 		@NonNull
 		@Override
 		public Fragment createFragment(int position)
 		{
-			Challenge challenge = getChallenge();
-
 			switch(position)
 			{
 				case 0:

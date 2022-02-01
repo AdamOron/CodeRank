@@ -9,6 +9,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import com.example.coderanknew.R;
+import com.example.coderanknew.syntaxhighlighting.SyntaxHighlighter;
 import com.example.coderanknew.user.UserPreview;
 import java.util.List;
 
@@ -39,8 +40,13 @@ public class SubmissionAdapter extends ArrayAdapter<Submission>
         UserPreview upSubAuthor = convertView.findViewById(R.id.upSubAuthor);
         upSubAuthor.setUser(submission.authorId);
 
+        TextView tvSubLang = convertView.findViewById(R.id.tvSubLang);
+        tvSubLang.setText(submission.lang);
+
+        /* Set Submission content TextView to highlighted syntax */
+        SyntaxHighlighter highlighter = new SyntaxHighlighter(submission.content);
         TextView tvSubContent = convertView.findViewById(R.id.tvSubContent);
-        tvSubContent.setText(submission.content);
+        tvSubContent.setText(highlighter.run());
 
         return convertView;
     }

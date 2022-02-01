@@ -1,5 +1,6 @@
 package com.example.coderanknew;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -9,7 +10,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.coderanknew.challenge.ChallengeCreateActivity;
 import com.example.coderanknew.user.LoginManager;
 
-public class HomeActivity extends AppCompatActivity implements View.OnClickListener
+public class HomeActivity extends Activity implements View.OnClickListener
 {
 	@Override
 	protected void onCreate(Bundle savedInstanceState)

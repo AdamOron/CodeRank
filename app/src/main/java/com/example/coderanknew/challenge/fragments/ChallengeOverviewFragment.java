@@ -1,14 +1,20 @@
-package com.example.coderanknew.challenge.fragments.overview;
+package com.example.coderanknew.challenge.fragments;
 
+import android.app.Activity;
 import android.os.Bundle;
 import androidx.fragment.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.TextView;
+
 import com.example.coderanknew.challenge.Challenge;
+import com.example.coderanknew.challenge.fragments.ChallengeSubmissionsFragment;
+import com.example.coderanknew.submission.Submission;
 import com.example.coderanknew.user.LoginManager;
 import com.example.coderanknew.R;
 import com.example.coderanknew.user.User;
@@ -23,7 +29,6 @@ import java.util.List;
 public abstract class ChallengeOverviewFragment<C extends Challenge> extends Fragment
 {
 	protected View view;
-
 	protected C challenge;
 
 	private CommentAdapter commentAdapter;
@@ -44,20 +49,25 @@ public abstract class ChallengeOverviewFragment<C extends Challenge> extends Fra
 	@Override
 	public View onCreateView(@NotNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
 	{
-		this.view = inflate(inflater, container);
+		view = inflate(inflater, container);
 
-		prepareCommentManager();
+		initVars();
 
 		prepare();
 
-		return this.view;
+		return view;
 	}
 
 	protected abstract View inflate(LayoutInflater inflater, ViewGroup container);
 
 	protected abstract void prepare();
 
-	protected void prepareCommentManager()
+	private void initVars()
+	{
+		initCommentManager();
+	}
+
+	private void initCommentManager()
 	{
 		this.commentField = view.findViewById(R.id.etComment);
 
@@ -73,7 +83,7 @@ public abstract class ChallengeOverviewFragment<C extends Challenge> extends Fra
 		this.comments = new ArrayList<>();
 		this.commentAdapter = new CommentAdapter(getActivity(), comments);
 
-		readComments();
+		updateComments();
 
 		ListView listView = view.findViewById(R.id.lvComments);
 		listView.setAdapter(commentAdapter);
@@ -81,7 +91,7 @@ public abstract class ChallengeOverviewFragment<C extends Challenge> extends Fra
 		listView.setOnItemClickListener((parent, view, position, id) -> Log.d("Comment Author ", comments.get(position).authorId + ""));
 	}
 
-	private void readComments()
+	private void updateComments()
 	{
 		Database database = new Database(getActivity());
 		database.open();
@@ -99,28 +109,38 @@ public abstract class ChallengeOverviewFragment<C extends Challenge> extends Fra
 		this.commentAdapter.notifyDataSetChanged();
 	}
 
-	private String getAuthorUsername()
-	{
-		Database userDatabase = new Database(getActivity());
-		userDatabase.open();
-		User author = userDatabase.getUserById(challenge.authorId);
-		userDatabase.close();
-		return author.username;
-	}
-
 	private void submitComment()
 	{
-		long authorId = LoginManager.getLoggedIn().id;
-		String content = commentField.getText().toString();
-		long parent = challenge.id;
+		/* Construct comment */
+		Comment comment = new Comment(
+				LoginManager.getLoggedIn().id, // Comment author is the User that's logged in
+				commentField.getText().toString(), // Get comment content from commentField EditText
+				new Date(), // Comment submission date is current date
+				challenge.id // Comment parent 'thread' is this challenge
+		);
 
-		Comment com = new Comment(authorId, content, new Date(), parent);
+		/* Reset comment field (must happen after we construct the Comment) */
+		resetCommentField();
 
+		/* Insert comment into ChallengeComments table */
 		Database db = new Database(getActivity());
 		db.open();
-		db.insertComment(com, Database.TBL_CH_COMMENTS);
+		db.insertComment(comment, Database.TBL_CH_COMMENTS);
 		db.close();
 
-		readComments();
+		/* Update comments */
+		updateComments();
+	}
+
+	private void resetCommentField()
+	{
+		/* Clear EditText */
+		commentField.setText(null);
+
+		/* Close Keyboard */
+		Activity activity = getActivity();
+		InputMethodManager imm = (InputMethodManager) activity.getSystemService(Activity.INPUT_METHOD_SERVICE);
+		View currentFocus = activity.getCurrentFocus();
+		if(currentFocus != null) imm.hideSoftInputFromWindow(currentFocus.getWindowToken(), 0);
 	}
 }

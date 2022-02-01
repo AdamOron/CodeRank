@@ -1,5 +1,6 @@
 package com.example.coderanknew.submission;
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -12,14 +13,12 @@ import com.example.coderanknew.user.LoginManager;
 import com.example.coderanknew.R;
 import com.example.coderanknew.sql.Database;
 
-public class CreateSubmissionActivity extends AppCompatActivity implements View.OnClickListener, AdapterView.OnItemClickListener, AdapterView.OnItemSelectedListener
+public class CreateSubmissionActivity extends Activity implements View.OnClickListener, AdapterView.OnItemClickListener, AdapterView.OnItemSelectedListener
 {
 	public static final int REQUEST_CODE = 19;
 
 	private EditText etContent;
 	private String selectedLang;
-
-	private static final String[] LANGUAGES = {"Java", "Python", "C++"};
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
@@ -39,14 +38,14 @@ public class CreateSubmissionActivity extends AppCompatActivity implements View.
 		View bSubmit = findViewById(R.id.bSubmitSubmission);
 		bSubmit.setOnClickListener(this);
 
-		this.selectedLang = LANGUAGES[0];
+		this.selectedLang = Submission.LANGUAGES[0];
 	}
 
 	private void initSpinner()
 	{
 		Spinner spLanguage = findViewById(R.id.spLanguage);
 
-		ArrayAdapter<String> adapter = new ArrayAdapter<>(this, R.layout.language_current_selection, LANGUAGES);
+		ArrayAdapter<String> adapter = new ArrayAdapter<>(this, R.layout.language_current_selection, Submission.LANGUAGES);
 		adapter.setDropDownViewResource(R.layout.language_spinner_dropdown_item);
 
 		spLanguage.setAdapter(adapter);
@@ -56,11 +55,10 @@ public class CreateSubmissionActivity extends AppCompatActivity implements View.
 	@Override
 	public void onClick(View view)
 	{
-		switch(view.getId())
+		if(view.getId() == R.id.bSubmitSubmission)
 		{
-			case R.id.bSubmitSubmission:
-				submitSubmission();
-				break;
+			submitSubmission();
+			return;
 		}
 	}
 

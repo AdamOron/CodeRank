@@ -3,16 +3,13 @@ package com.example.coderanknew.challenge.fragments;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
-
 import com.example.coderanknew.R;
 import com.example.coderanknew.challenge.Challenge;
 import com.example.coderanknew.challenge.NormalChallenge;
@@ -20,18 +17,15 @@ import com.example.coderanknew.sql.Database;
 import com.example.coderanknew.submission.CreateSubmissionActivity;
 import com.example.coderanknew.submission.Submission;
 import com.example.coderanknew.submission.SubmissionAdapter;
-
 import java.util.ArrayList;
 import java.util.List;
 
 public class ChallengeSubmissionsFragment extends Fragment implements View.OnClickListener, AdapterView.OnItemClickListener
 {
 	private View view;
-
 	private Challenge challenge;
-
 	private SubmissionAdapter submissionAdapter;
-	private ArrayList<Submission> submissions;
+	private List<Submission> submissions;
 
 	public ChallengeSubmissionsFragment(Challenge challenge)
 	{
@@ -70,27 +64,27 @@ public class ChallengeSubmissionsFragment extends Fragment implements View.OnCli
 
 	private void initSubmissionListView()
 	{
-		this.submissions = new ArrayList<>();
-		this.submissionAdapter = new SubmissionAdapter(getActivity(), submissions);
+		submissions = new ArrayList<>();
+		submissionAdapter = new SubmissionAdapter(getActivity(), submissions);
 
-		readSubmissions();
+		updateSubmissions();
 	}
 
-	private void readSubmissions()
+	private void updateSubmissions()
 	{
 		Database database = new Database(getContext());
 		database.open();
 
 		List<Submission> newSubmissions = database.getAllSubmissionsByFilter(
-				Database.COL_SUB_CHALLENGE_ID + "=" + this.challenge.id
+				Database.COL_SUB_CHALLENGE_ID + "=" + challenge.id
 				, Database.COL_SUB_ID + " DESC");
 
 		database.close();
 
-		this.submissions.clear();
-		this.submissions.addAll(newSubmissions);
+		submissions.clear();
+		submissions.addAll(newSubmissions);
 
-		this.submissionAdapter.notifyDataSetChanged();
+		submissionAdapter.notifyDataSetChanged();
 	}
 
 	@Override
@@ -116,16 +110,11 @@ public class ChallengeSubmissionsFragment extends Fragment implements View.OnCli
 	{
 		super.onActivityResult(requestCode, resultCode, data);
 
-		if(resultCode != Activity.RESULT_OK)
+		if(requestCode == CreateSubmissionActivity.REQUEST_CODE)
 		{
-			throw new IllegalStateException("Result Code is not OK.");
-		}
+			if(resultCode != Activity.RESULT_OK) return;
 
-		switch(requestCode)
-		{
-			case CreateSubmissionActivity.REQUEST_CODE:
-				readSubmissions();
-				break;
+			updateSubmissions();
 		}
 	}
 

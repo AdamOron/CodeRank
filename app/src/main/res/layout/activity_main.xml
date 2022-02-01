@@ -6,7 +6,9 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        tools:context=".MainActivity">
+        tools:context=".MainActivity"
+        android:padding="20dp"
+        >
 
     <RelativeLayout
             android:layout_width="match_parent"
@@ -45,7 +47,6 @@
 
     <TextView
             android:id="@+id/tvSubContent"
-            android:fontFamily="sans-serif-medium"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/submission_body"

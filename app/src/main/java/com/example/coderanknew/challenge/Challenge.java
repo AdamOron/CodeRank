@@ -1,6 +1,6 @@
 package com.example.coderanknew.challenge;
 
-import com.example.coderanknew.challenge.fragments.overview.ChallengeOverviewFragment;
+import com.example.coderanknew.challenge.fragments.ChallengeOverviewFragment;
 import java.util.Date;
 
 public abstract class Challenge
@@ -17,5 +17,5 @@ public abstract class Challenge
         this.creationDate = creationDate;
     }
 
-    public abstract ChallengeOverviewFragment<? extends Challenge> createOverviewFragment();
+    public abstract ChallengeOverviewFragment<?> createOverviewFragment();
 }

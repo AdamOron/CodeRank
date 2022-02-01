@@ -1,17 +1,19 @@
 package com.example.coderanknew;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.text.Spannable;
-import android.text.SpannableString;
 import android.text.SpannableStringBuilder;
 import android.text.style.ForegroundColorSpan;
 import android.widget.TextView;
 
-import androidx.appcompat.app.AppCompatActivity;
+import com.example.coderanknew.syntaxhighlighting.SyntaxHighlighter;
+import com.example.coderanknew.syntaxhighlighting.Token;
+import com.example.coderanknew.syntaxhighlighting.Tokenizer;
 
-public class MainActivity extends AppCompatActivity
+public class MainActivity extends Activity
 {
 	@Override
 	protected void onCreate(Bundle savedInstanceState)

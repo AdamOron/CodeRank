@@ -1,17 +1,15 @@
 package com.example.coderanknew;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
-
-import androidx.appcompat.app.AppCompatActivity;
-
 import com.example.coderanknew.user.LoginManager;
 import com.example.coderanknew.user.User;
 
-public class RegisterActivity extends AppCompatActivity implements View.OnClickListener
+public class RegisterActivity extends Activity implements View.OnClickListener
 {
 	private EditText etFirstName, etLastName, etEmail, etUsername, etPassword;
 

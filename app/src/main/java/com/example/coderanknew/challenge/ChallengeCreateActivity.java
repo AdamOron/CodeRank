@@ -1,5 +1,6 @@
 package com.example.coderanknew.challenge;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -10,7 +11,7 @@ import com.example.coderanknew.R;
 import com.example.coderanknew.sql.Database;
 import java.util.Date;
 
-public class ChallengeCreateActivity extends AppCompatActivity implements View.OnClickListener
+public class ChallengeCreateActivity extends Activity implements View.OnClickListener
 {
 	private EditText etTitle, etContent;
 

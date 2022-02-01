@@ -4,7 +4,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@color/background"
     android:paddingVertical="20dp"
     >
 
@@ -28,16 +27,16 @@
             />
 
         <TextView
-            android:id="@+id/tvProgLang"
+            android:id="@+id/tvSubLang"
             android:fontFamily="sans-serif-medium"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Java"
             android:textColor="#C5C5C5"
             android:layout_alignParentRight="true"
-            android:layout_marginTop="15dp"
-            android:layout_marginEnd="15dp"
-            android:textSize="22sp"
+            android:layout_marginTop="18dp"
+            android:layout_marginEnd="18dp"
+            android:textSize="20sp"
             />
 
     </RelativeLayout>
@@ -45,7 +44,7 @@
 
     <TextView
         android:id="@+id/tvSubContent"
-        android:fontFamily="sans-serif-medium"
+        android:fontFamily="@font/roboto_mono"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/submission_body"

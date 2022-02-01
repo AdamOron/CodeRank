@@ -12,12 +12,14 @@
     <color name="gray_400">#FFBDBDBD</color>
     <color name="gray_600">#FF757575</color>
 
-    <color name="sub_header">#2C2C2C</color>
-    <color name="sub_body">#242424</color>
+    <color name="text">#FFFFFFFF</color>
+    <color name="hint">#979797</color>
 
     <color name="background">#333333</color>
     <color name="buttons">#595959</color>
     <color name="edit_texts">#2B2B2B</color>
     <color name="text_views">#2C2C2C</color>
-    <color name="text">#FFFFFFFF</color>
+
+    <color name="sub_header">#2C2C2C</color>
+    <color name="sub_body">#242424</color>
 </resources>

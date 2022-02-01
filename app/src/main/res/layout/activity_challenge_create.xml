@@ -11,58 +11,97 @@
         android:background="@color/background"
         >
 
-    <TextView
+    <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Topic Title"
-            android:textSize="24sp"
-            android:textStyle="bold"
-            android:textColor="@color/white"
-            android:layout_marginBottom="10dp"
-            />
-
-    <EditText
-            android:id="@+id/etTopicTitle"
-            android:layout_width="300dp"
-            android:layout_height="50dp"
-            android:textSize="28sp"
-            android:gravity="center"
-            android:textColor="@color/white"
-            android:background="@drawable/rounded_button"
+            android:orientation="vertical"
             android:layout_marginBottom="30dp"
-            />
+            >
 
-    <TextView
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:fontFamily="sans-serif-medium"
+                android:textSize="20sp"
+                android:textColor="@color/white"
+                android:text="Title"
+
+                android:layout_marginBottom="7dp"
+                android:layout_marginStart="5dp"
+                />
+        
+        <EditText
+                android:id="@+id/etTopicTitle"
+
+                android:background="@drawable/rounded_edit_text"
+                android:layout_width="350dp"
+                android:layout_height="wrap_content"
+
+                android:paddingHorizontal="15dp"
+                android:paddingVertical="10dp"
+
+                android:fontFamily="sans-serif-medium"
+                android:textSize="24sp"
+                android:textColor="@color/white"
+                android:textColorHint="@color/hint"
+                android:hint="e.g. Print 'Hello World'"
+                />
+
+    </LinearLayout>
+
+    <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Topic Content"
-            android:textSize="24sp"
-            android:textStyle="bold"
-            android:textColor="@color/white"
-            android:layout_marginBottom="10dp"
-            />
+            android:orientation="vertical"
+            android:layout_marginBottom="30dp"
+            >
 
-    <EditText
-            android:id="@+id/etTopicContent"
-            android:layout_width="300dp"
-            android:layout_height="200dp"
-            android:textSize="24sp"
-            android:gravity="start"
-            android:textColor="@color/white"
-            android:background="@drawable/rounded_edit_text"
-            android:layout_marginBottom="40dp"
-            />
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:fontFamily="sans-serif-medium"
+                android:textSize="20sp"
+                android:textColor="@color/white"
+                android:text="Content"
+
+                android:layout_marginBottom="7dp"
+                android:layout_marginStart="5dp"
+                />
+
+        <EditText
+                android:id="@+id/etTopicContent"
+
+                android:background="@drawable/rounded_edit_text"
+                android:layout_width="350dp"
+                android:layout_height="wrap_content"
+
+                android:inputType="textMultiLine"
+                android:importantForAutofill="no"
+
+                android:padding="15dp"
+                android:textSize="22sp"
+                android:textColor="@color/white"
+                android:textColorHint="@color/hint"
+                android:hint="e.g. Print 'Hello World' in your favorite language!"
+                />
+
+    </LinearLayout>
 
     <TextView
             android:id="@+id/bSubmit"
+
             android:layout_width="300dp"
             android:layout_height="50dp"
-            android:text="Submit"
+
+            android:background="@drawable/rounded_button"
+            android:gravity="center"
+
             android:textStyle="bold"
             android:textColor="@color/white"
             android:textSize="22sp"
-            android:gravity="center"
-            android:background="@drawable/rounded_button"
+            android:text="Submit"
             />
 
 </LinearLayout>

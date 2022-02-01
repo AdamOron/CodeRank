@@ -1,5 +1,6 @@
 package com.example.coderanknew;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -11,7 +12,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.coderanknew.user.LoginManager;
 import com.example.coderanknew.user.User;
 
-public class LoginActivity extends AppCompatActivity implements View.OnClickListener
+public class LoginActivity extends Activity implements View.OnClickListener
 {
 	private EditText etUsername, etPassword;
 
