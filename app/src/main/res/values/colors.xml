@@ -22,4 +22,5 @@
 
     <color name="sub_header">#2C2C2C</color>
     <color name="sub_body">#242424</color>
+    <color name="progressColor">#FFB300</color>
 </resources>
