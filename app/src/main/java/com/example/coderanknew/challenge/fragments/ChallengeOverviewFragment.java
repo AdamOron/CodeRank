@@ -11,13 +11,11 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
-
 import com.example.coderanknew.challenge.Challenge;
-import com.example.coderanknew.challenge.fragments.ChallengeSubmissionsFragment;
+import com.example.coderanknew.rating.Rating;
 import com.example.coderanknew.submission.Submission;
 import com.example.coderanknew.user.LoginManager;
 import com.example.coderanknew.R;
-import com.example.coderanknew.user.User;
 import com.example.coderanknew.comment.Comment;
 import com.example.coderanknew.comment.CommentAdapter;
 import com.example.coderanknew.sql.Database;
@@ -26,10 +24,12 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public abstract class ChallengeOverviewFragment<C extends Challenge> extends Fragment
+public abstract class ChallengeOverviewFragment<C extends Challenge> extends Fragment implements ChallengeSubmissionsFragment.OnSubmissionsChangeListener
 {
 	protected View view;
 	protected C challenge;
+
+	private TextView tvSubCount;
 
 	private CommentAdapter commentAdapter;
 	private ArrayList<Comment> comments;
@@ -58,6 +58,14 @@ public abstract class ChallengeOverviewFragment<C extends Challenge> extends Fra
 		return view;
 	}
 
+	@Override
+	public void onChange(List<Submission> newSubmissions)
+	{
+		String subCount = newSubmissions.size() + "";
+
+		tvSubCount.setText(subCount);
+	}
+
 	protected abstract View inflate(LayoutInflater inflater, ViewGroup container);
 
 	protected abstract void prepare();
@@ -65,6 +73,8 @@ public abstract class ChallengeOverviewFragment<C extends Challenge> extends Fra
 	private void initVars()
 	{
 		initCommentManager();
+
+		this.tvSubCount = view.findViewById(R.id.tvSubCount);
 	}
 
 	private void initCommentManager()
@@ -81,7 +91,7 @@ public abstract class ChallengeOverviewFragment<C extends Challenge> extends Fra
 	private void initCommentListView()
 	{
 		this.comments = new ArrayList<>();
-		this.commentAdapter = new CommentAdapter(getActivity(), comments);
+		this.commentAdapter = new CommentAdapter(requireActivity(), Rating.Context.CHALLENGE, comments);
 
 		updateComments();
 

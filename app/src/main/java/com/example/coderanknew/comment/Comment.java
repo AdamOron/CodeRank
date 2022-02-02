@@ -4,12 +4,13 @@ import androidx.annotation.NonNull;
 
 import java.util.Date;
 
-public class Comment {
+public class Comment
+{
     public long id;
     public long authorId;
     public String content;
     public Date creationDate;
-    public long parent;
+    public long contextId;
 
     public Comment(long id, long authorId, String content, Date creationDate, long parent)
     {
@@ -17,7 +18,7 @@ public class Comment {
         this.authorId = authorId;
         this.content = content;
         this.creationDate = creationDate;
-        this.parent = parent;
+        this.contextId = parent;
     }
 
     public Comment(long authorId, String content, Date creationDate, long parent)
@@ -25,13 +26,13 @@ public class Comment {
         this.authorId = authorId;
         this.content = content;
         this.creationDate = creationDate;
-        this.parent = parent;
+        this.contextId = parent;
     }
 
     @NonNull
     @Override
     public String toString()
     {
-        return "Comment[" + id + "," + authorId + "," + content + "," + parent + "]";
+        return "Comment[" + id + "," + authorId + "," + content + "," + contextId + "]";
     }
 }

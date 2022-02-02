@@ -10,6 +10,7 @@ import android.util.Log;
 import androidx.annotation.Nullable;
 
 import com.example.coderanknew.challenge.Challenge;
+import com.example.coderanknew.rating.Rating;
 import com.example.coderanknew.user.User;
 import com.example.coderanknew.challenge.NormalChallenge;
 import com.example.coderanknew.comment.Comment;
@@ -17,6 +18,7 @@ import com.example.coderanknew.submission.Submission;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 public class Database extends SQLiteOpenHelper
 {
@@ -129,11 +131,36 @@ public class Database extends SQLiteOpenHelper
 
     /**
      * ============================================================================================
+     *                                  RATING TABLES PROPERTIES
+     * ============================================================================================
+     */
+
+    public static final String TBL_CH_RATINGS       = "tblChRatings";
+    public static final String TBL_SUB_RATINGS      = "tblSubRatings";
+
+    public static final String COL_RATING_AUTHOR_ID = "ratingAuthorId";
+    public static final String COL_RATING_CONTEXT_ID = "ratingContextId";
+    public static final String COL_RATING_RATING    = "ratingRating";
+
+    public static final String[] COLS_RATINGS = {COL_RATING_AUTHOR_ID, COL_RATING_CONTEXT_ID, COL_RATING_RATING};
+
+    private static final String CREATE_TBL_CH_RATINGS = "CREATE TABLE IF NOT EXISTS " + TBL_CH_RATINGS + "(" +
+            COL_RATING_AUTHOR_ID + " INTEGER," +
+            COL_RATING_CONTEXT_ID + " VARCHAR," +
+            COL_RATING_RATING + " INTEGER)";
+
+    private static final String CREATE_TBL_SUB_RATINGS = "CREATE TABLE IF NOT EXISTS " + TBL_SUB_RATINGS + "(" +
+            COL_RATING_AUTHOR_ID + " INTEGER," +
+            COL_RATING_CONTEXT_ID + " INTEGER," +
+            COL_RATING_RATING + " VARCHAR)";
+
+    /**
+     * ============================================================================================
      *                                  DATABASE PROPERTIES
      * ============================================================================================
      */
 
-    private static final int DB_VERSION = 2;
+    private static final int DB_VERSION = 1;
     public static final String DB_NAME = "database.db";
 
     private SQLiteDatabase database;
@@ -151,6 +178,8 @@ public class Database extends SQLiteOpenHelper
         sqLiteDatabase.execSQL(CREATE_TBL_SUBMISSIONS);
         sqLiteDatabase.execSQL(CREATE_TBL_CH_COMMENTS);
         sqLiteDatabase.execSQL(CREATE_TBL_SUB_COMMENTS);
+        sqLiteDatabase.execSQL(CREATE_TBL_CH_RATINGS);
+        sqLiteDatabase.execSQL(CREATE_TBL_SUB_RATINGS);
     }
 
     @Override
@@ -161,6 +190,8 @@ public class Database extends SQLiteOpenHelper
         sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + TBL_SUBMISSIONS);
         sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + TBL_CH_COMMENTS);
         sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + TBL_SUB_COMMENTS);
+        sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + TBL_CH_RATINGS);
+        sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + TBL_SUB_RATINGS);
 
         onCreate(sqLiteDatabase);
     }
@@ -472,7 +503,7 @@ public class Database extends SQLiteOpenHelper
         values.put(COL_COM_AUTHOR_ID, com.authorId);
         values.put(COL_COM_CONTENT, com.content);
         values.put(COL_COM_DATE, SQLConverter.dateToString(com.creationDate));
-        values.put(COL_COM_PARENT, com.parent);
+        values.put(COL_COM_PARENT, com.contextId);
 
         long insertedId = database.insert(table, null, values);
 
@@ -488,7 +519,7 @@ public class Database extends SQLiteOpenHelper
         values.put(COL_COM_AUTHOR_ID, com.authorId);
         values.put(COL_COM_CONTENT, com.content);
         values.put(COL_COM_DATE, SQLConverter.dateToString(com.creationDate));
-        values.put(COL_COM_PARENT, com.parent);
+        values.put(COL_COM_PARENT, com.contextId);
 
         return database.update(table, values, COL_COM_ID + "=" + com.id, null);
     }
@@ -551,5 +582,120 @@ public class Database extends SQLiteOpenHelper
         long parent = cursor.getLong(cursor.getColumnIndexOrThrow(COL_COM_PARENT));
 
         return new Comment(id, authorId, content, date, parent);
+    }
+
+    /**
+     * ============================================================================================
+     *                                  RATING TABLES METHODS
+     * ============================================================================================
+     */
+
+    private static String selectRating(long authorId, long threadId)
+    {
+        return COL_RATING_CONTEXT_ID + "=" + threadId + " AND " + COL_RATING_AUTHOR_ID + "=" + authorId;
+    }
+
+    public void insertChallengeRating(Rating rating)
+    {
+        insertRating(rating, TBL_CH_RATINGS);
+    }
+
+    public void insertSubmissionRating(Rating rating)
+    {
+        insertRating(rating, TBL_SUB_RATINGS);
+    }
+
+    private void insertRating(Rating rating, String table)
+    {
+        ContentValues values = new ContentValues();
+        values.put(COL_RATING_AUTHOR_ID, rating.authorId);
+        values.put(COL_RATING_CONTEXT_ID, rating.contextId);
+        values.put(COL_RATING_RATING, rating.rating);
+
+        long insertedId = database.insert(table, null, values);
+
+        Log.d("data", "Rating " + insertedId + " inserted to database.");
+    }
+
+    public long updateChallengeRating(Rating rating)
+    {
+        return updateRatingByFilter(rating, selectRating(rating.authorId, rating.contextId), TBL_CH_RATINGS);
+    }
+
+    public long updateSubmissionRating(Rating rating)
+    {
+        return updateRatingByFilter(rating, selectRating(rating.authorId, rating.contextId), TBL_SUB_RATINGS);
+    }
+
+    private long updateRatingByFilter(Rating rating, String filter, String table)
+    {
+        ContentValues values = new ContentValues();
+        values.put(COL_RATING_AUTHOR_ID, rating.authorId);
+        values.put(COL_RATING_CONTEXT_ID, rating.contextId);
+        values.put(COL_RATING_RATING, rating.rating);
+
+        return database.update(table, values, filter, null);
+    }
+
+    public Rating getRating(long authorId, long threadId, String table)
+    {
+        return getRatingByFilter(selectRating(authorId, threadId), table);
+    }
+
+    private Rating getRatingByFilter(String selection, String table)
+    {
+        Cursor cursor = database.query(table, COLS_RATINGS, selection, null, null, null, null);
+        return cursor.getCount() > 0 ? singleRatingFromCursor(cursor) : null;
+    }
+
+    public List<Rating> getAllChallengeRatings(long challengeId)
+    {
+        return getAllRatingsByFilter(COL_RATING_CONTEXT_ID + "=" + challengeId, COL_RATING_AUTHOR_ID + " DESC", TBL_CH_RATINGS);
+    }
+
+    public List<Rating> getAllSubmissionRatings(long submissionId)
+    {
+        return getAllRatingsByFilter(COL_RATING_CONTEXT_ID + "=" + submissionId, COL_RATING_AUTHOR_ID + " DESC", TBL_SUB_RATINGS);
+    }
+
+    private List<Rating> getAllRatingsByFilter(String selection, String orderBy, String table)
+    {
+        Cursor cursor = database.query(table, COLS_RATINGS, selection, null, null, null, orderBy);
+        return allRatingsFromCursor(cursor);
+    }
+
+    private ArrayList<Rating> getAllRatings(String table)
+    {
+        Cursor cursor = database.query(table, COLS_RATINGS, null, null, null, null, null);
+        return allRatingsFromCursor(cursor);
+    }
+
+    private static ArrayList<Rating> allRatingsFromCursor(Cursor cursor)
+    {
+        ArrayList<Rating> list = new ArrayList<>();
+
+        if(cursor.moveToFirst())
+        {
+            do
+            {
+                list.add(singleRatingFromCursor(cursor));
+            }
+            while(cursor.moveToNext());
+        }
+
+        return list;
+    }
+
+    /**
+     * @param cursor
+     * @return the User from the Cursor's current position.
+     */
+    private static Rating singleRatingFromCursor(Cursor cursor)
+    {
+        long authorId = cursor.getLong(cursor.getColumnIndexOrThrow(COL_RATING_AUTHOR_ID));
+        long contextId = cursor.getLong(cursor.getColumnIndexOrThrow(COL_RATING_CONTEXT_ID));
+        float rating = cursor.getFloat(cursor.getColumnIndexOrThrow(COL_RATING_RATING));
+
+        return new Rating(authorId, contextId, rating);
     }
 }

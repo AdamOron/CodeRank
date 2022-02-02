@@ -2,24 +2,45 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
         android:orientation="vertical"
         android:gravity="start"
         android:background="@color/background"
         android:paddingVertical="15dp"
+        android:paddingHorizontal="20dp"
         >
 
-    <com.example.coderanknew.user.UserPreview
-            android:id="@+id/upCommentAuthor"
-            android:layout_width="wrap_content"
+    <RelativeLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="5dp"
+            android:orientation="horizontal"
             android:layout_marginBottom="10dp"
-            />
+        >
+
+        <com.example.coderanknew.user.UserPreview
+                android:id="@+id/upCommentAuthor"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="4dp"
+                />
+
+        <RatingBar
+                android:id="@+id/rbCommentRating"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="?android:attr/ratingBarStyleIndicator"
+                android:layout_alignParentEnd="true"
+                android:layout_marginEnd="5dp"
+                android:isIndicator="true"
+                android:theme="@style/GreyRatingBar"
+                android:rating="3.5"
+                />
+
+    </RelativeLayout>
 
     <TextView
             android:id="@+id/tvCommentContent"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="18sp"
             android:textColor="@color/text"

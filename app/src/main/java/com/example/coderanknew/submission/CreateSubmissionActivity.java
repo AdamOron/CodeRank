@@ -7,13 +7,11 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
-
-import androidx.appcompat.app.AppCompatActivity;
 import com.example.coderanknew.user.LoginManager;
 import com.example.coderanknew.R;
 import com.example.coderanknew.sql.Database;
 
-public class CreateSubmissionActivity extends Activity implements View.OnClickListener, AdapterView.OnItemClickListener, AdapterView.OnItemSelectedListener
+public class CreateSubmissionActivity extends Activity implements AdapterView.OnItemClickListener, AdapterView.OnItemSelectedListener
 {
 	public static final int REQUEST_CODE = 19;
 
@@ -33,12 +31,12 @@ public class CreateSubmissionActivity extends Activity implements View.OnClickLi
 	{
 		this.initSpinner();
 
+		this.selectedLang = Submission.LANGUAGES[0];
+
 		this.etContent = findViewById(R.id.etSubmissionContent);
 
 		View bSubmit = findViewById(R.id.bSubmitSubmission);
-		bSubmit.setOnClickListener(this);
-
-		this.selectedLang = Submission.LANGUAGES[0];
+		bSubmit.setOnClickListener($ -> submitSubmission());
 	}
 
 	private void initSpinner()
@@ -52,14 +50,22 @@ public class CreateSubmissionActivity extends Activity implements View.OnClickLi
 		spLanguage.setOnItemSelectedListener(this);
 	}
 
+	/* Spinner Handling */
+
 	@Override
-	public void onClick(View view)
+	public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l)
 	{
-		if(view.getId() == R.id.bSubmitSubmission)
-		{
-			submitSubmission();
-			return;
-		}
+		this.selectedLang = (String) adapterView.getItemAtPosition(i);
+	}
+
+	@Override
+	public void onItemClick(AdapterView<?> adapterView, View view, int i, long l)
+	{
+	}
+
+	@Override
+	public void onNothingSelected(AdapterView<?> adapterView)
+	{
 	}
 
 	private void submitSubmission()
@@ -86,23 +92,6 @@ public class CreateSubmissionActivity extends Activity implements View.OnClickLi
 
 	private long getChallengeId()
 	{
-		Bundle extras = getIntent().getExtras();
-		return extras.getLong(Submission.KEY_CHALLENGE_ID);
-	}
-
-	@Override
-	public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l)
-	{
-		this.selectedLang = (String) adapterView.getItemAtPosition(i);
-	}
-
-	@Override
-	public void onItemClick(AdapterView<?> adapterView, View view, int i, long l)
-	{
-	}
-
-	@Override
-	public void onNothingSelected(AdapterView<?> adapterView)
-	{
+		return getIntent().getExtras().getLong(Submission.KEY_CHALLENGE_ID, -1L);
 	}
 }

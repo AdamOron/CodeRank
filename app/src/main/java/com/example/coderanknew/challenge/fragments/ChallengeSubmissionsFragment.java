@@ -19,17 +19,32 @@ import com.example.coderanknew.submission.Submission;
 import com.example.coderanknew.submission.SubmissionAdapter;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class ChallengeSubmissionsFragment extends Fragment implements View.OnClickListener, AdapterView.OnItemClickListener
 {
 	private View view;
+
 	private Challenge challenge;
+
 	private SubmissionAdapter submissionAdapter;
 	private List<Submission> submissions;
+
+	public interface OnSubmissionsChangeListener
+	{
+		void onChange(List<Submission> newSubmissions);
+	}
+
+	private OnSubmissionsChangeListener onSubmissionsChangeListener;
 
 	public ChallengeSubmissionsFragment(Challenge challenge)
 	{
 		this.challenge = challenge;
+	}
+
+	public void setOnSubmissionsChangeListener(OnSubmissionsChangeListener onSubmissionsChangeListener)
+	{
+		this.onSubmissionsChangeListener = onSubmissionsChangeListener;
 	}
 
 	@Override
@@ -65,7 +80,7 @@ public class ChallengeSubmissionsFragment extends Fragment implements View.OnCli
 	private void initSubmissionListView()
 	{
 		submissions = new ArrayList<>();
-		submissionAdapter = new SubmissionAdapter(getActivity(), submissions);
+		submissionAdapter = new SubmissionAdapter(requireActivity(), submissions);
 
 		updateSubmissions();
 	}
@@ -85,6 +100,8 @@ public class ChallengeSubmissionsFragment extends Fragment implements View.OnCli
 		submissions.addAll(newSubmissions);
 
 		submissionAdapter.notifyDataSetChanged();
+
+		onSubmissionsChangeListener.onChange(newSubmissions);
 	}
 
 	@Override

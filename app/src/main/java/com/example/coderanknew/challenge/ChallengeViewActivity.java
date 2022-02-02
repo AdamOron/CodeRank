@@ -10,6 +10,7 @@ import androidx.lifecycle.Lifecycle;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 import androidx.viewpager2.widget.ViewPager2;
 import com.example.coderanknew.R;
+import com.example.coderanknew.challenge.fragments.ChallengeOverviewFragment;
 import com.example.coderanknew.challenge.fragments.ChallengeSubmissionsFragment;
 import com.example.coderanknew.sql.Database;
 import com.google.android.material.tabs.TabLayout;
@@ -78,11 +79,18 @@ public class ChallengeViewActivity extends FragmentActivity
 	{
 		private final Challenge challenge;
 
+		private final ChallengeOverviewFragment<?> overviewFragment;
+		private final ChallengeSubmissionsFragment submissionsFragment;
+
 		public ChallengeFragmentAdapter(@NonNull FragmentManager fragmentManager, @NonNull Lifecycle lifecycle)
 		{
 			super(fragmentManager, lifecycle);
 
 			this.challenge = getChallenge();
+
+			this.overviewFragment = challenge.createOverviewFragment();
+			this.submissionsFragment = new ChallengeSubmissionsFragment(challenge);
+			this.submissionsFragment.setOnSubmissionsChangeListener(this.overviewFragment);
 		}
 
 		@NonNull
@@ -92,10 +100,10 @@ public class ChallengeViewActivity extends FragmentActivity
 			switch(position)
 			{
 				case 0:
-					return challenge.createOverviewFragment();
+					return overviewFragment;
 
 				case 1:
-					return new ChallengeSubmissionsFragment(challenge);
+					return submissionsFragment;
 			}
 
 			throw new InvalidParameterException(position + " is an invalid Challenge Fragment position.");
