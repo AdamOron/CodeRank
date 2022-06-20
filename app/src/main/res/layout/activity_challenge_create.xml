@@ -7,7 +7,7 @@
         android:layout_height="match_parent"
         android:gravity="center"
         android:orientation="vertical"
-        tools:context=".challenge.ChallengeCreateActivity"
+        tools:context=".post.challenge.activities.ChallengeCreateActivity"
         android:background="@color/background"
         >
 
@@ -15,7 +15,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:layout_marginBottom="30dp"
             >
 
         <TextView
@@ -30,7 +29,7 @@
                 android:layout_marginBottom="7dp"
                 android:layout_marginStart="5dp"
                 />
-        
+
         <EditText
                 android:id="@+id/etTopicTitle"
 
@@ -46,16 +45,10 @@
                 android:textColor="@color/white"
                 android:textColorHint="@color/hint"
                 android:hint="e.g. Print 'Hello World'"
+                android:inputType="text"
+
+                android:layout_marginBottom="30dp"
                 />
-
-    </LinearLayout>
-
-    <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_marginBottom="30dp"
-            >
 
         <TextView
                 android:layout_width="wrap_content"
@@ -85,6 +78,33 @@
                 android:textColor="@color/white"
                 android:textColorHint="@color/hint"
                 android:hint="e.g. Print 'Hello World' in your favorite language!"
+
+                android:layout_marginBottom="30dp"
+                />
+
+        <CheckBox
+                android:id="@+id/cbLimitedTime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Limited Time"
+                android:textSize="20sp"
+                android:textColor="@color/white"
+                android:fontFamily="sans-serif-medium"
+                android:paddingEnd="10dp"
+                />
+
+        <TextView
+                android:id="@+id/tvEndDate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="10/2/2022"
+                android:textSize="20sp"
+                android:textColor="@color/hint"
+                android:fontFamily="sans-serif-medium"
+                android:background="@drawable/rounded_edit_text"
+                android:paddingHorizontal="20dp"
+                android:paddingVertical="10dp"
+                android:layout_marginBottom="30dp"
                 />
 
     </LinearLayout>
@@ -102,6 +122,18 @@
             android:textColor="@color/white"
             android:textSize="22sp"
             android:text="Submit"
+            />
+
+    <TextView
+            android:id="@+id/tvError"
+            android:visibility="gone"
+            android:layout_marginTop="20dp"
+            android:layout_width="300dp"
+            android:layout_height="50dp"
+            android:gravity="center"
+            android:textSize="18sp"
+            android:fontFamily="sans-serif-medium"
+            android:textColor="#FF0000"
             />
 
 </LinearLayout>

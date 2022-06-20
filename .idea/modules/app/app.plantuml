@@ -1,0 +1,450 @@
+@startuml
+
+title __CODERANKNEW.APP's Class Diagram__\n
+
+  namespace com.example.coderanknew {
+    class com.example.coderanknew.BuildConfig {
+    }
+  }
+  
+
+  namespace com.example.coderanknew {
+    namespace challenge {
+      abstract class com.example.coderanknew.challenge.Challenge {
+      }
+    }
+  }
+  
+
+  namespace com.example.coderanknew {
+    namespace challenge {
+      namespace activities {
+        class com.example.coderanknew.challenge.activities.ChallengeCreateActivity {
+        }
+      }
+    }
+  }
+  
+
+  namespace com.example.coderanknew {
+    namespace challenge {
+      namespace activities {
+        class com.example.coderanknew.challenge.activities.ChallengeViewActivity {
+        }
+      }
+    }
+  }
+  
+
+  namespace com.example.coderanknew {
+    namespace challenge {
+      namespace adapters {
+        class com.example.coderanknew.challenge.adapters.ChallengePreviewAdapter {
+        }
+      }
+    }
+  }
+  
+
+  namespace com.example.coderanknew {
+    namespace challenge {
+      namespace fragments {
+        class com.example.coderanknew.challenge.fragments.ChallengeFragmentAdapter {
+        }
+      }
+    }
+  }
+  
+
+  namespace com.example.coderanknew {
+    namespace challenge {
+      namespace fragments {
+        abstract class com.example.coderanknew.challenge.fragments.OverviewFragment {
+        }
+      }
+    }
+  }
+  
+
+  namespace com.example.coderanknew {
+    namespace challenge {
+      namespace fragments {
+        abstract class com.example.coderanknew.challenge.fragments.SubmissionsFragment {
+        }
+      }
+    }
+  }
+  
+
+  namespace com.example.coderanknew {
+    namespace challenge {
+      namespace fragments {
+        namespace listeners {
+          interface com.example.coderanknew.challenge.fragments.listeners.OnChallengeStateChangeListener {
+          }
+        }
+      }
+    }
+  }
+  
+
+  namespace com.example.coderanknew {
+    namespace challenge {
+      namespace fragments {
+        namespace listeners {
+          interface com.example.coderanknew.challenge.fragments.listeners.OnSubmissionsChangeListener {
+          }
+        }
+      }
+    }
+  }
+  
+
+  namespace com.example.coderanknew {
+    namespace challenge {
+      namespace limited {
+        class com.example.coderanknew.challenge.limited.LimitedChallenge {
+        }
+      }
+    }
+  }
+  
+
+  namespace com.example.coderanknew {
+    namespace challenge {
+      namespace limited {
+        namespace fragments {
+          class com.example.coderanknew.challenge.limited.fragments.LimitedOverview {
+          }
+        }
+      }
+    }
+  }
+  
+
+  namespace com.example.coderanknew {
+    namespace challenge {
+      namespace limited {
+        namespace fragments {
+          class com.example.coderanknew.challenge.limited.fragments.LimitedSubmissions {
+          }
+        }
+      }
+    }
+  }
+  
+
+  namespace com.example.coderanknew {
+    namespace challenge {
+      namespace limited {
+        namespace fragments {
+          class com.example.coderanknew.challenge.limited.fragments.SendNotificationReceiver {
+          }
+        }
+      }
+    }
+  }
+  
+
+  namespace com.example.coderanknew {
+    namespace challenge {
+      namespace normal {
+        class com.example.coderanknew.challenge.normal.NormalChallenge {
+        }
+      }
+    }
+  }
+  
+
+  namespace com.example.coderanknew {
+    namespace challenge {
+      namespace normal {
+        namespace fragments {
+          class com.example.coderanknew.challenge.normal.fragments.NormalOverview {
+          }
+        }
+      }
+    }
+  }
+  
+
+  namespace com.example.coderanknew {
+    namespace challenge {
+      namespace normal {
+        namespace fragments {
+          class com.example.coderanknew.challenge.normal.fragments.NormalSubmissions {
+          }
+        }
+      }
+    }
+  }
+  
+
+  namespace com.example.coderanknew {
+    namespace entry {
+      class com.example.coderanknew.entry.ImagePickerDialog {
+      }
+    }
+  }
+  
+
+  namespace com.example.coderanknew {
+    namespace entry {
+      class com.example.coderanknew.entry.LoginActivity {
+      }
+    }
+  }
+  
+
+  namespace com.example.coderanknew {
+    namespace entry {
+      class com.example.coderanknew.entry.MainActivity {
+      }
+    }
+  }
+  
+
+  namespace com.example.coderanknew {
+    namespace entry {
+      class com.example.coderanknew.entry.RegisterActivity {
+      }
+    }
+  }
+  
+
+  namespace com.example.coderanknew {
+    namespace home {
+      class com.example.coderanknew.home.ChallengeListFragment {
+      }
+    }
+  }
+  
+
+  namespace com.example.coderanknew {
+    namespace home {
+      class com.example.coderanknew.home.HomeActivity {
+      }
+    }
+  }
+  
+
+  namespace com.example.coderanknew {
+    namespace post {
+      abstract class com.example.coderanknew.post.Post {
+      }
+    }
+  }
+  
+
+  namespace com.example.coderanknew {
+    namespace post {
+      namespace comment {
+        class com.example.coderanknew.post.comment.Comment {
+        }
+      }
+    }
+  }
+  
+
+  namespace com.example.coderanknew {
+    namespace post {
+      namespace comment {
+        class com.example.coderanknew.post.comment.CommentAdapter {
+        }
+      }
+    }
+  }
+  
+
+  namespace com.example.coderanknew {
+    namespace post {
+      namespace comment {
+        class com.example.coderanknew.post.comment.CommentManager {
+        }
+      }
+    }
+  }
+  
+
+  namespace com.example.coderanknew {
+    namespace post {
+      namespace rating {
+        class com.example.coderanknew.post.rating.Rating {
+        }
+      }
+    }
+  }
+  
+
+  namespace com.example.coderanknew {
+    namespace sql {
+      class com.example.coderanknew.sql.DataConverter {
+      }
+    }
+  }
+  
+
+  namespace com.example.coderanknew {
+    namespace sql {
+      class com.example.coderanknew.sql.Database {
+      }
+    }
+  }
+  
+
+  namespace com.example.coderanknew {
+    namespace submission {
+      class com.example.coderanknew.submission.CreateSubmissionActivity {
+      }
+    }
+  }
+  
+
+  namespace com.example.coderanknew {
+    namespace submission {
+      class com.example.coderanknew.submission.Submission {
+      }
+    }
+  }
+  
+
+  namespace com.example.coderanknew {
+    namespace submission {
+      class com.example.coderanknew.submission.SubmissionAdapter {
+      }
+    }
+  }
+  
+
+  namespace com.example.coderanknew {
+    namespace submission {
+      class com.example.coderanknew.submission.SubmissionViewActivity {
+      }
+    }
+  }
+  
+
+  namespace com.example.coderanknew {
+    namespace syntax {
+      class com.example.coderanknew.syntax.SyntaxHighlighter {
+      }
+    }
+  }
+  
+
+  namespace com.example.coderanknew {
+    namespace syntax {
+      class com.example.coderanknew.syntax.Token {
+      }
+    }
+  }
+  
+
+  namespace com.example.coderanknew {
+    namespace syntax {
+      class com.example.coderanknew.syntax.Tokenizer {
+      }
+    }
+  }
+  
+
+  namespace com.example.coderanknew {
+    namespace user {
+      class com.example.coderanknew.user.LoginManager {
+      }
+    }
+  }
+  
+
+  namespace com.example.coderanknew {
+    namespace user {
+      class com.example.coderanknew.user.User {
+      }
+    }
+  }
+  
+
+  namespace com.example.coderanknew {
+    namespace user {
+      class com.example.coderanknew.user.UserPreview {
+      }
+    }
+  }
+  
+
+  namespace com.example.coderanknew {
+    namespace utils {
+      class com.example.coderanknew.utils.Debug {
+      }
+    }
+  }
+  
+
+  namespace com.example.coderanknew {
+    namespace utils {
+      class com.example.coderanknew.utils.MidnightCalendar {
+      }
+    }
+  }
+  
+
+  com.example.coderanknew.challenge.Challenge -up-|> com.example.coderanknew.post.Post
+  com.example.coderanknew.challenge.activities.ChallengeCreateActivity -up-|> android.app.Activity
+  com.example.coderanknew.challenge.activities.ChallengeViewActivity -up-|> androidx.fragment.app.FragmentActivity
+  com.example.coderanknew.challenge.adapters.ChallengePreviewAdapter -up-|> android.widget.ArrayAdapter
+  com.example.coderanknew.challenge.fragments.ChallengeFragmentAdapter -up-|> androidx.viewpager2.adapter.FragmentStateAdapter
+  com.example.coderanknew.challenge.fragments.OverviewFragment .up.|> com.example.coderanknew.challenge.fragments.listeners.OnSubmissionsChangeListener
+  com.example.coderanknew.challenge.fragments.OverviewFragment -up-|> androidx.fragment.app.Fragment
+  com.example.coderanknew.challenge.fragments.OverviewFragment o-- C : challenge
+  com.example.coderanknew.challenge.fragments.OverviewFragment o-- com.example.coderanknew.challenge.fragments.listeners.OnChallengeStateChangeListener : onChallengeStateChangeListener
+  com.example.coderanknew.challenge.fragments.OverviewFragment o-- com.example.coderanknew.post.comment.CommentManager : commentManager
+  com.example.coderanknew.challenge.fragments.SubmissionsFragment .up.|> com.example.coderanknew.challenge.fragments.listeners.OnChallengeStateChangeListener
+  com.example.coderanknew.challenge.fragments.SubmissionsFragment -up-|> androidx.fragment.app.Fragment
+  com.example.coderanknew.challenge.fragments.SubmissionsFragment o-- C : challenge
+  com.example.coderanknew.challenge.fragments.SubmissionsFragment o-- com.example.coderanknew.challenge.fragments.listeners.OnSubmissionsChangeListener : onSubmissionsChangeListener
+  com.example.coderanknew.challenge.fragments.SubmissionsFragment o-- com.example.coderanknew.submission.SubmissionAdapter : submissionAdapter
+  com.example.coderanknew.challenge.limited.LimitedChallenge -up-|> com.example.coderanknew.challenge.normal.NormalChallenge
+  com.example.coderanknew.challenge.limited.LimitedChallenge o-- com.example.coderanknew.utils.MidnightCalendar : finalDate
+  com.example.coderanknew.challenge.limited.fragments.LimitedOverview -up-|> com.example.coderanknew.challenge.fragments.OverviewFragment
+  com.example.coderanknew.challenge.limited.fragments.LimitedSubmissions -up-|> com.example.coderanknew.challenge.fragments.SubmissionsFragment
+  com.example.coderanknew.challenge.limited.fragments.SendNotificationReceiver -up-|> android.content.BroadcastReceiver
+  com.example.coderanknew.challenge.limited.fragments.SendNotificationReceiver o-- com.example.coderanknew.challenge.limited.LimitedChallenge : challenge
+  com.example.coderanknew.challenge.limited.fragments.SendNotificationReceiver o-- com.example.coderanknew.user.User : user
+  com.example.coderanknew.challenge.normal.NormalChallenge -up-|> com.example.coderanknew.challenge.Challenge
+  com.example.coderanknew.challenge.normal.fragments.NormalOverview -up-|> com.example.coderanknew.challenge.fragments.OverviewFragment
+  com.example.coderanknew.challenge.normal.fragments.NormalSubmissions -up-|> com.example.coderanknew.challenge.fragments.SubmissionsFragment
+  com.example.coderanknew.entry.ImagePickerDialog -up-|> android.app.Dialog
+  com.example.coderanknew.entry.LoginActivity -up-|> android.app.Activity
+  com.example.coderanknew.entry.MainActivity -up-|> android.app.Activity
+  com.example.coderanknew.entry.RegisterActivity -up-|> android.app.Activity
+  com.example.coderanknew.home.ChallengeListFragment -up-|> androidx.fragment.app.Fragment
+  com.example.coderanknew.home.HomeActivity -up-|> androidx.fragment.app.FragmentActivity
+  com.example.coderanknew.home.HomeActivity o-- com.example.coderanknew.home.HomeActivity.HomeFragmentAdapter : homeFragmentAdapter
+  com.example.coderanknew.post.comment.CommentAdapter -up-|> android.widget.ArrayAdapter
+  com.example.coderanknew.post.comment.CommentAdapter o-- com.example.coderanknew.post.Post : post
+  com.example.coderanknew.post.comment.CommentManager -up-|> android.widget.LinearLayout
+  com.example.coderanknew.post.comment.CommentManager o-- com.example.coderanknew.post.comment.CommentAdapter : commentAdapter
+  com.example.coderanknew.post.comment.CommentManager o-- com.example.coderanknew.post.Post : post
+  com.example.coderanknew.sql.Database -up-|> android.database.sqlite.SQLiteOpenHelper
+  com.example.coderanknew.submission.CreateSubmissionActivity .up.|> android.widget.AdapterView.OnItemClickListener
+  com.example.coderanknew.submission.CreateSubmissionActivity .up.|> android.widget.AdapterView.OnItemSelectedListener
+  com.example.coderanknew.submission.CreateSubmissionActivity -up-|> android.app.Activity
+  com.example.coderanknew.submission.Submission -up-|> com.example.coderanknew.post.Post
+  com.example.coderanknew.submission.SubmissionAdapter -up-|> android.widget.ArrayAdapter
+  com.example.coderanknew.submission.SubmissionViewActivity -up-|> android.app.Activity
+  com.example.coderanknew.submission.SubmissionViewActivity o-- com.example.coderanknew.post.comment.CommentManager : commentManager
+  com.example.coderanknew.submission.SubmissionViewActivity o-- com.example.coderanknew.submission.Submission : submission
+  com.example.coderanknew.syntax.Token o-- com.example.coderanknew.syntax.Token.Type : type
+  com.example.coderanknew.user.UserPreview .up.|> android.view.View.OnClickListener
+  com.example.coderanknew.user.UserPreview -up-|> android.widget.LinearLayout
+  com.example.coderanknew.user.UserPreview o-- com.example.coderanknew.user.User : user
+
+
+right footer
+
+
+PlantUML diagram generated by SketchIt! (https://bitbucket.org/pmesmeur/sketch.it)
+For more information about this tool, please contact philippe.mesmeur@gmail.com
+endfooter
+
+@enduml

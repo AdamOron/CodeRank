@@ -18,7 +18,7 @@
                     android:id="@+id/ivProfilePicture"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
-                    android:src="@drawable/cat"
+                    android:src="@drawable/example_pfp"
                     />
 
         </androidx.cardview.widget.CardView>
@@ -32,6 +32,7 @@
                 android:textSize="18sp"
                 android:textColor="@color/text"
                 android:text="username"
+                android:maxLines="1"
                 />
 
 </LinearLayout>

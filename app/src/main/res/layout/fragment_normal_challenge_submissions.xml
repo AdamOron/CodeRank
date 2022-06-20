@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".post.challenge.fragments.SubmissionsFragment"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:background="@color/background"
+        >
+
+    <TextView
+        android:id="@+id/bSubmitSubmission"
+        android:layout_width="300dp"
+        android:layout_height="50dp"
+        android:text="Submit Submission"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        android:gravity="center"
+        android:textStyle="bold"
+        android:background="@drawable/rounded_button"
+        android:layout_marginTop="50dp"
+            />
+
+    <ListView
+        android:id="@+id/lvSubmissions"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:listitem="@layout/layout_submission"
+        android:divider="#AA7E7E7E"
+        android:dividerHeight="0.5dp"
+            />
+
+</LinearLayout>

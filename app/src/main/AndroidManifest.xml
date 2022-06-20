@@ -1,27 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.coderanknew">
+        package="com.example.coderank">
 
     <application
-        android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
-        android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
-        android:supportsRtl="true"
-        android:theme="@style/Theme.CodeRankNew">
-        <activity android:name=".submission.CreateSubmissionActivity" />
-        <activity android:name=".challenge.ChallengeCreateActivity" />
-        <activity android:name=".challenge.ChallengeViewActivity" />
-        <activity android:name=".HomeActivity" />
-        <activity android:name=".RegisterActivity" />
-        <activity android:name=".LoginActivity" />
-        <activity android:name=".MainActivity">
+            android:allowBackup="true"
+            android:icon="@mipmap/ic_launcher"
+            android:label="@string/app_name"
+            android:roundIcon="@mipmap/ic_launcher_round"
+            android:supportsRtl="true"
+            android:theme="@style/Theme.CodeRankNew">
+        <activity android:name=".post.submission.SubmissionViewActivity" />
+        <activity android:name=".post.submission.CreateSubmissionActivity" />
+        <activity android:name=".post.challenge.activities.ChallengeCreateActivity" />
+        <activity android:name=".post.challenge.activities.ChallengeViewActivity" />
+        <activity android:name=".entry.home.HomeActivity" />
+        <activity android:name="com.example.coderank.entry.RegisterActivity" />
+        <activity android:name="com.example.coderank.entry.LoginActivity" />
+        <activity android:name="com.example.coderank.entry.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <receiver android:name=".post.challenge.limited.fragments.SendNotificationReceiver"/>
     </application>
 
 </manifest>

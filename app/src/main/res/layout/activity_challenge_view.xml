@@ -7,7 +7,7 @@
         android:layout_height="match_parent"
         android:gravity="center"
         android:orientation="vertical"
-        tools:context=".challenge.ChallengeViewActivity"
+        tools:context=".post.challenge.activities.ChallengeViewActivity"
         android:background="@color/background"
         >
 

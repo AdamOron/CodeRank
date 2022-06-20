@@ -4,8 +4,20 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:paddingVertical="20dp"
+    android:padding="20dp"
+    android:gravity="end"
     >
+
+    <RatingBar
+            android:id="@+id/rbSubmissionAvgRating"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="?android:attr/ratingBarStyleIndicator"
+            android:layout_marginBottom="10dp"
+            android:theme="@style/GreyRatingBar"
+            android:isIndicator="true"
+            android:numStars="5"
+            />
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -18,11 +30,11 @@
             android:src="@drawable/submission_header"
             />
 
-        <com.example.coderanknew.user.UserPreview
+        <com.example.coderank.user.UserPreview
             android:id="@+id/upSubAuthor"
             android:layout_marginStart="15dp"
             android:layout_marginTop="15dp"
-            android:layout_width="wrap_content"
+            android:layout_width="280dp"
             android:layout_height="wrap_content"
             />
 
